@@ -16,10 +16,11 @@
 
         <!--below widget is for image of bot-->
         <ImageView
+            android:id="@+id/bot_image"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="10dp"
-            android:src="@drawable/bot_img" />
+            android:src="@drawable/female_bot" />
 
         <!--below widget is for
             displaying message of bot-->

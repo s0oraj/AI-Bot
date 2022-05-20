@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,17 +12,29 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter {
 
     // variable for our array list and context.
-    private ArrayList<Message> mMessageModalArrayList;
+    private List<Message> mMessageModalArrayList;
     private Context context;
 
+    public boolean getmIsFemaleBot() {
+        return mIsFemaleBot;
+    }
+
+    public void setmIsFemaleBot(boolean mIsFemaleBot) {
+        this.mIsFemaleBot = mIsFemaleBot;
+    }
+
+    private boolean mIsFemaleBot;
+
     // constructor class.
-    public MessageAdapter(ArrayList<Message> mMessageModalArrayList, Context context) {
+    public MessageAdapter(ArrayList<Message> mMessageModalArrayList, Context context, boolean isFemaleBot) {
         this.mMessageModalArrayList = mMessageModalArrayList;
         Collections.reverse(mMessageModalArrayList);
+        mIsFemaleBot = isFemaleBot;
         this.context = context;
     }
 
@@ -54,9 +67,18 @@ public class MessageAdapter extends RecyclerView.Adapter {
                 // below line is to set the text to our text view of user layout
                 ((UserViewHolder) holder).userTV.setText(modal.getMessage());
                 break;
-            case "bot":
+            case "bot": {
                 // below line is to set the text to our text view of bot layout
                 ((BotViewHolder) holder).botTV.setText(modal.getMessage());
+
+                         if (mIsFemaleBot) {
+                             ((BotViewHolder) holder).botImage.setImageResource(R.drawable.female_bot);
+                         } else {
+                             ((BotViewHolder) holder).botImage.setImageResource(R.drawable.male_bot);
+                           }
+                    }
+
+
                 break;
         }
     }
@@ -80,6 +102,27 @@ public class MessageAdapter extends RecyclerView.Adapter {
         }
     }
 
+    public void addAll(List<Message> data){
+        if (data != null && !data.isEmpty()) {
+            // If new data is not empty then update allPosts List
+            mMessageModalArrayList = data;
+            //Notify the adapter for the change in dataset
+            notifyDataSetChanged();
+        }
+    }
+
+
+    public void clear(){
+        if(mMessageModalArrayList!=null && !mMessageModalArrayList.isEmpty()) {
+            int size = mMessageModalArrayList.size();
+            mMessageModalArrayList.clear();
+
+            // Notify the adapter that items were removed so adapter can update the recyclerview accordingly.
+            notifyItemRangeRemoved(0, size);
+        }
+
+    }
+
     public static class UserViewHolder extends RecyclerView.ViewHolder {
 
         // creating a variable
@@ -99,10 +142,13 @@ public class MessageAdapter extends RecyclerView.Adapter {
         // for our text view.
         TextView botTV;
 
+        ImageView botImage;
+
         public BotViewHolder(@NonNull View itemView) {
             super(itemView);
             // initializing with id.
             botTV = itemView.findViewById(R.id.idTVBot);
+            botImage=itemView.findViewById(R.id.bot_image);
         }
     }
 }

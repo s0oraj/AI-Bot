@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/SWAGAT/Desktop/sooraj doc/AiBot/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1915" />
+        <entry key="..\:/Users/SWAGAT/Desktop/sooraj doc/AiBot/app/src/main/res/layout/activity_main.xml" value="0.18333333333333332" />
+        <entry key="..\:/Users/SWAGAT/Desktop/sooraj doc/AiBot/app/src/main/res/layout/bot_message.xml" value="0.18333333333333332" />
+        <entry key="..\:/Users/SWAGAT/Desktop/sooraj doc/AiBot/app/src/main/res/menu/main.xml" value="0.26875" />
+        <entry key="..\:/Users/SWAGAT/Desktop/sooraj doc/AiBot/app/src/main/res/menu/nav_menu.xml" value="0.26875" />
+        <entry key="..\:/Users/SWAGAT/Desktop/sooraj doc/AiBot/app/src/main/res/xml/settings_main.xml" value="0.2441123188405797" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
