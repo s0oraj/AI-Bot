@@ -36,8 +36,6 @@ public class MainActivity extends AppCompatActivity {
     int currentPosition = 0;
 
 
-    boolean isFemaleBot;
-
     boolean isScrollToLastRequired = false;
     // creating variables for our
     // widgets in xml file.
@@ -77,8 +75,7 @@ public class MainActivity extends AppCompatActivity {
         // creating a new array list
         messageModalArrayList = new ArrayList<>();
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        isFemaleBot = prefs.getBoolean("is_female_bot", false);
+       
 
 
 
@@ -94,17 +91,9 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
-                if(isFemaleBot){
+              
                     sendMessage(userMsgEdt.getText().toString());
-                } else{
-
-                    sendMessage2(userMsgEdt.getText().toString());
-                }
-                // calling a method to send message
-                // to our bot to get response.
-                //  sendMessage2(userMsgEdt.getText().toString());
-
-
+               
 
                 // below line we are setting text in our edit text as empty
                 userMsgEdt.setText("");
@@ -189,58 +178,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-
-            case R.id.change_bot: {
-                changeBot();
-                return true;
-            }
-        }
-
-        return super.onOptionsItemSelected(item);
-
-    }
-
-    public void changeBot() {
-
-
-        if (isFemaleBot) {
-
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putBoolean("is_female_bot", false);
-            editor.apply();
-
-            isFemaleBot = prefs.getBoolean("is_female_bot", false);
-            messageAdapter.clear();
-            messageAdapter.setmIsFemaleBot(isFemaleBot);
-            Toast.makeText(this,"Switched to male bot",Toast.LENGTH_SHORT).show();
-
-
-        } else {
-
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putBoolean("is_female_bot", true);
-            editor.apply();
-
-            isFemaleBot = prefs.getBoolean("is_female_bot", true);
-            messageAdapter.clear();
-            messageAdapter.setmIsFemaleBot(isFemaleBot);
-
-            Toast.makeText(this,"Switched to female bot",Toast.LENGTH_SHORT).show();
-
-        }
-
-    }
 
 
     private void sendMessage(String userMsg) {
@@ -309,51 +247,5 @@ public class MainActivity extends AppCompatActivity {
         queue.add(jsonObjectRequest);
     }
 
-    private void sendMessage2(String userMsg) {
-        // below line is to pass message to our
-        // array list which is entered by the user.
-        messageModalArrayList.add(new Message(userMsg, USER_KEY));
-        messageAdapter.notifyDataSetChanged();
-
-        // url for our brain
-        // make sure to add mshape for uid.
-        // make sure to add your url.
-        String url = "http://api.brainshop.ai/get?bid=166510&key=YBpfIjUIAdTfbCg7&uid=mshape&msg=" + userMsg;
-
-        // creating a variable for our request queue.
-        RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
-
-        // on below line we are making a json object request for a get request and passing our url .
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    // in on response method we are extracting data
-                    // from json response and adding this response to our array list.
-                    String botResponse = response.getString("cnt");
-                    messageModalArrayList.add(new Message(botResponse, BOT_KEY));
-
-                    // notifying our adapter as data changed.
-                    messageAdapter.notifyDataSetChanged();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-
-                    // handling error response from bot.
-                    messageModalArrayList.add(new Message("No response", BOT_KEY));
-                    messageAdapter.notifyDataSetChanged();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                // error handling.
-                messageModalArrayList.add(new Message("Sorry no response found", BOT_KEY));
-                Toast.makeText(MainActivity.this, "No response from the bot..", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        // at last adding json object
-        // request to our queue.
-        queue.add(jsonObjectRequest);
-    }
+    
 }
