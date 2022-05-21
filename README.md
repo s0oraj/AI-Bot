@@ -1,11 +1,9 @@
 # AI-Bot
 An Atritifical Intelligence based chatbot app which learns from human interactions and grows.
+As the user keeps interacting, the bot keeps transcript of each conversation and grows accordingly.
 
-# Students
-A simple android app which displays a list of students and their respective data.
-A user can add a new student or edit an exisiting students data.
 
- Install & try the app: [Download APK](https://drive.google.com/file/d/1i9sD4aG5QyO2PVUSN_AVUEArNl6UVDFd/view?usp=sharing)
+ Install & try the app: [Download APK](https://drive.google.com/file/d/1NzS22CWuP5iF0RQOytyMGUt_TKbALD7V/view)
  
  
  ## Screenshots
