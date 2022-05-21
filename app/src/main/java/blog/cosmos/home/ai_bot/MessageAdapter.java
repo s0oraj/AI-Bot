@@ -14,15 +14,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+
+/**This class populates our Recyclerview with its dataset which contains user messages and bot messages**/
 public class MessageAdapter extends RecyclerView.Adapter {
 
-    // variable for our array list and context.
+
     private List<Message> mMessageModalArrayList;
     private Context context;
 
     
 
-    // constructor class.
     public MessageAdapter(ArrayList<Message> mMessageModalArrayList, Context context) {
         this.mMessageModalArrayList = mMessageModalArrayList;
         Collections.reverse(mMessageModalArrayList);
@@ -33,16 +34,15 @@ public class MessageAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
-        // below code is to switch our
-        // layout type along with view holder.
+    
         switch (viewType) {
             case 0:
-                // below line we are inflating user message layout.
+
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_message, parent, false);
 
                 return new UserViewHolder(view);
             case 1:
-                // below line we are inflating bot message layout.
+       
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.bot_message, parent, false);
                 return new BotViewHolder(view);
         }
@@ -55,11 +55,11 @@ public class MessageAdapter extends RecyclerView.Adapter {
         Message modal = mMessageModalArrayList.get(position);
         switch (modal.getSender()) {
             case "user":
-                // below line is to set the text to our text view of user layout
+
                 ((UserViewHolder) holder).userTV.setText(modal.getMessage());
                 break;
             case "bot": {
-                // below line is to set the text to our text view of bot layout
+      
                 ((BotViewHolder) holder).botTV.setText(modal.getMessage());
 
                 
@@ -72,7 +72,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        // return the size of array list
+        
         return mMessageModalArrayList.size();
     }
 
@@ -91,9 +91,9 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
     public void addAll(List<Message> data){
         if (data != null && !data.isEmpty()) {
-            // If new data is not empty then update allPosts List
+          
             mMessageModalArrayList = data;
-            //Notify the adapter for the change in dataset
+       
             notifyDataSetChanged();
         }
     }
@@ -104,7 +104,6 @@ public class MessageAdapter extends RecyclerView.Adapter {
             int size = mMessageModalArrayList.size();
             mMessageModalArrayList.clear();
 
-            // Notify the adapter that items were removed so adapter can update the recyclerview accordingly.
             notifyItemRangeRemoved(0, size);
         }
 
@@ -112,28 +111,26 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
     public static class UserViewHolder extends RecyclerView.ViewHolder {
 
-        // creating a variable
-        // for our text view.
+      
         TextView userTV;
 
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
-            // initializing with id.
+          
             userTV = itemView.findViewById(R.id.idTVUser);
         }
     }
 
     public static class BotViewHolder extends RecyclerView.ViewHolder {
 
-        // creating a variable
-        // for our text view.
+
         TextView botTV;
 
        
 
         public BotViewHolder(@NonNull View itemView) {
             super(itemView);
-            // initializing with id.
+           
             botTV = itemView.findViewById(R.id.idTVBot);
           
         }
