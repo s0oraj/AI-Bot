@@ -19,7 +19,7 @@ As the user keeps interacting, the bot keeps transcript of each conversation and
 ## Working of the app
  
  * This app displays a list of user and bot messages combined using androids recyclerview and recyclerview adapter classes.
- * It fetches data from an [PersonalityForge API](https://www.personalityforge.com/chatbot-api.php) by using  [Volley library](https://github.com/google/volley)
+ * It fetches data from an [PersonalityForge API](https://www.personalityforge.com/chatbot-api.php). Data is being fetched by using  [Volley library](https://github.com/google/volley) to connect to the internet. Volley works in the background thread and once the response is out, it then returns this response to the main UI thread from where the new data is shown in the Main Screen of the app.
 
  ## Features
  * Users can interact with an AI bot and as they talk more and more, the bot adapts and grows. It uses all conversation transcripts with any user.
